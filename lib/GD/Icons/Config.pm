@@ -1,8 +1,8 @@
 package GD::Icons::Config;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
-# $Id: Config.pm,v 1.3 2007/05/03 21:16:51 canaran Exp $
+# $Id: Config.pm,v 1.5 2007/05/10 16:37:34 canaran Exp $
 
 use warnings;
 use strict;
@@ -10,7 +10,6 @@ use strict;
 use Carp;
 use Config::General;
 use Tie::IxHash;
-use Data::Dumper;
 
 our $DEFAULT_OBJ = GD::Icons::Config->new;
 
@@ -251,7 +250,7 @@ Payan Canaran <canaran@cshl.edu>
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =head1 ACKNOWLEDGEMENTS
 

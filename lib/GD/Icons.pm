@@ -1,8 +1,8 @@
-﻿package GD::Icons;
+package GD::Icons;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
-# $Id: Icons.pm,v 1.4 2007/05/03 21:16:51 canaran Exp $
+# $Id: Icons.pm,v 1.6 2007/05/10 18:15:01 canaran Exp $
 
 use warnings;
 use strict;
@@ -759,7 +759,7 @@ Payan Canaran <canaran@cshl.edu>
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =head1 ACKNOWLEDGEMENTS
 
