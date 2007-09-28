@@ -1,8 +1,8 @@
 package GD::Icons;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
-# $Id: Icons.pm,v 1.6 2007/05/10 18:15:01 canaran Exp $
+# $Id: Icons.pm,v 1.8 2007/08/06 15:36:54 canaran Exp $
 
 use warnings;
 use strict;
@@ -25,6 +25,13 @@ sub new {
     my $gd_icons_config = GD::Icons::Config->new($config_file);
     $self->config($gd_icons_config->config);
 
+    # Assign alpha
+    my $alpha = $params{alpha} ? $params{alpha} : 0;
+    if ($alpha =~ /[^0-9]/ or $alpha > 127) {
+        croak("alpha must be a value between 0 and 127!");
+    }
+    $self->alpha($alpha);
+    
     # Parse shapes keys
     my $shape_keys =
         $params{shape_keys}
@@ -141,6 +148,8 @@ sub generate_icons {
 
     my $config = $self->config;
 
+    my $alpha = $self->alpha;
+    
     my @shape_keys   = @{$self->shape_keys};
     my @shape_values = @{$self->shape_values};
 
@@ -181,15 +190,15 @@ sub generate_icons {
 
                 my $image = new GD::Image($side_length, $side_length);
 
-                my $white_color = $image->colorAllocate(255, 255, 255);
-                my $fill_color  = $image->colorAllocate(@$color);
-                my $draw_color  = $image->colorAllocate(@$line_color);
+                my $white_color = $image->colorAllocateAlpha(255, 255, 255, $alpha);
+                my $fill_color  = $image->colorAllocateAlpha(@$color, $alpha);
+                my $draw_color  = $image->colorAllocateAlpha(@$line_color, $alpha);
 
                 $image->transparent($white_color);
 
                 $image->setThickness($line_thickness);
 
-                while ($shape =~ /\s*(py|fl)\[([0-9, ]+)\]\s*/g) {
+                while ($shape =~ /\s*(py|fl|nm)\[([0-9, ]+|:auto)\]\s*/g) {
                     my ($action, $values) = ($1, $2);
 
                     if ($action eq "py") {
@@ -209,6 +218,21 @@ sub generate_icons {
                         $image->fill($x1, $y1, $fill_color);
                     }
 
+                    elsif ($action eq "nm" && $values eq ":auto") {
+                        my ($number) = $shape_keys[$shape_i] =~ /:(\d+)/;
+                        if ($number && $number > 99) {
+                            $number = 'M';
+                        }    
+                        if (!$number) {
+                            $number = 'U';
+                        }    
+                        
+                        my $x = int(($side_length - 5 * length($number)) / 2) + 1;
+                        my $y = ($side_length - 8) / 2;
+                        
+                        $image->string(gdTinyFont, $x, $y, $number, $draw_color);
+                    }
+                    
                     else {
                         croak(
                             "Unrecognized action ($action) in shapes file!");
@@ -241,6 +265,12 @@ sub generate_icons {
 ###################
 # GET/SET METHODS #
 ###################
+
+sub alpha {
+    my ($self, $value) = @_;
+    $self->{alpha} = $value if @_ > 1;
+    return $self->{alpha};
+}
 
 sub color_keys {
     my ($self, $value) = @_;
@@ -728,6 +758,7 @@ The constructor parameters and their descriptions follow:
 
  Parameter           Description                          Format
  ---------           -----------                          ------
+ alpha               Alpha level of icon (0-127)          scalar
  color_keys          Keys to code by color                arrayref
  color_values        Values for color coding              arrayref
  config              External configuration file          scalar
@@ -759,7 +790,7 @@ Payan Canaran <canaran@cshl.edu>
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =head1 ACKNOWLEDGEMENTS
 

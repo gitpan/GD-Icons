@@ -1,8 +1,8 @@
 package GD::Icons::Config;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
-# $Id: Config.pm,v 1.5 2007/05/10 16:37:34 canaran Exp $
+# $Id: Config.pm,v 1.9 2007/08/28 14:16:32 canaran Exp $
 
 use warnings;
 use strict;
@@ -100,12 +100,24 @@ sub _all_shapes {
           qq(sl[11] lt[1] lc[_Black] py[5,0 10,10 0,10 5,0]              fl[5,5]),
         'diamond' =>
           qq(sl[11] lt[1] lc[_Black] py[5,0 0,5 5,10 10,5 5,0]           fl[5,5]),
+        'l-shape' =>
+          qq(sl[11] lt[1] lc[_Black] py[0,0 5,0 5,5 10,5 10,10 0,10 0,0] fl[3,3]),
+        'pi' =>
+          qq(sl[11] lt[1] lc[_Black] py[0,0 10,0 10,4 8,4 8,10 6,10 6,4 4,4 4,10 2,10 2,4 0,4 0,0] fl[2,2]),
+        'plus' =>
+          qq(sl[11] lt[1] lc[_Black] py[3,0 7,0 7,3 10,3 10,7 7,7 7,10 3,10 3,7 0,7 0,3 3,3 3,0] fl[4,4]),
+        'square-pieces' =>
+          qq(sl[11] lt[1] lc[_Black] py[0,0 10,0 10,4 8,4 8,6 10,6 10,10 0,10 0,6 2,6 2,4 0,4 0,0] fl[5,5]),
         'sand-clock' =>
           qq(sl[11] lt[1] lc[_Black] py[0,0 10,0 5,5 10,10 0,10 5,5 0,0] fl[5,2] fl[5,8]),
         '_padded-square' =>
           qq(sl[11] lt[1] lc[:fill]  py[0,0 0,9 9,9 0,9 0,0]             fl[5,5]),
+        '_large_square' =>
+          qq(sl[22] lt[1] lc[_Black] py[0,0 21,0 21,21 0,21 0,0]         fl[5,5]),
         '_letter-m' =>
           qq(sl[11] lt[1] lc[_Black] py[0,1 3,1 5,3 7,1 10,1 10,9 7,9 7,4 5,6 3,4 3,9 0,9 0,1] fl[2,2]),
+        '_number-flag' =>
+          qq(sl[14] lt[1] lc[_Black] py[0,0 13,0 13,13 0,13 0,0] fl[5,5] nm[:auto]),
     );
 
     return \%all;
@@ -206,6 +218,7 @@ sub _all_colors {
         Yellow               => '#FFFF00',
         YellowGreen          => '#9ACD32',
         _Black               => '#000000',
+        _White               => '#FFFFFF',
     );
 
     return \%all;
@@ -250,7 +263,7 @@ Payan Canaran <canaran@cshl.edu>
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =head1 ACKNOWLEDGEMENTS
 
