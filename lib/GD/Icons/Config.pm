@@ -1,6 +1,6 @@
 package GD::Icons::Config;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 # $Id: Config.pm,v 1.9 2007/08/28 14:16:32 canaran Exp $
 
@@ -257,13 +257,13 @@ The default values can be obtained by:
 
 =head1 AUTHOR
 
-Payan Canaran <canaran@cshl.edu>
+Payan Canaran <pcanaran@cpan.org>
 
 =head1 BUGS
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =head1 ACKNOWLEDGEMENTS
 

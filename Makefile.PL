@@ -4,7 +4,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
     NAME                => 'GD::Icons',
-    AUTHOR              => 'Payan Canaran <canaran@cshl.edu>',
+    AUTHOR              => 'Payan Canaran <pcanaran@cpan.org>',
     VERSION_FROM        => 'lib/GD/Icons.pm',
     ABSTRACT_FROM       => 'lib/GD/Icons.pm',
     PL_FILES            => {},
